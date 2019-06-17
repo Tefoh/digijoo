@@ -31,21 +31,7 @@ class CheckoutController extends Controller
             return redirect()->route('checkout.index');
         }
 
-//        $gateway = new \Braintree\Gateway([
-//            'environment' => config('services.braintree.environment'),
-//            'merchantId' => config('services.braintree.merchantId'),
-//            'publicKey' => config('services.braintree.publicKey'),
-//            'privateKey' => config('services.braintree.privateKey')
-//        ]);
-//
-//        try {
-//            $paypalToken = $gateway->ClientToken()->generate();
-//        } catch (\Exception $e) {
-//            $paypalToken = null;
-//        }
-
         return view('checkout')->with([
-//            'paypalToken' => $paypalToken,
             'discount' => getNumbers()->get('discount'),
             'newSubtotal' => getNumbers()->get('newSubtotal'),
             'newTax' => getNumbers()->get('newTax'),
@@ -80,38 +66,6 @@ class CheckoutController extends Controller
 
             echo $e->getMessage();
         }
-        $contents = Cart::content()->map(function ($item) {
-            return $item->model->slug.', '.$item->qty;
-        })->values()->toJson();
-
-//        try {
-//            $charge = Stripe::charges()->create([
-//                'amount' => getNumbers()->get('newTotal') / 100,
-//                'currency' => 'CAD',
-//                'source' => $request->stripeToken,
-//                'description' => 'Order',
-//                'receipt_email' => $request->email,
-//                'metadata' => [
-//                    'contents' => $contents,
-//                    'quantity' => Cart::instance('default')->count(),
-//                    'discount' => collect(session()->get('coupon'))->toJson(),
-//                ],
-//            ]);
-//
-//            $order = $this->addToOrdersTables($request, null);
-//            Mail::send(new OrderPlaced($order));
-//
-//            // decrease the quantities of all the products in the cart
-//            $this->decreaseQuantities();
-//
-//            Cart::instance('default')->destroy();
-//            session()->forget('coupon');
-//
-//            return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
-//        } catch (CardErrorException $e) {
-//            $this->addToOrdersTables($request, $e->getMessage());
-//            return back()->withErrors('Error! ' . $e->getMessage());
-//        }
     }
 
     protected function addToOrdersTables($request, $error)

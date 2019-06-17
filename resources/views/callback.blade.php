@@ -42,7 +42,7 @@
                 <div class="title"><span>شماره تراکنش : </span>{{ $trans_id }}</div>
                 <div class="title"><span>شماره سفارش : </span>{{ $order_id }}</div>
                 <div class="title"><span>کد وضعیت : </span>{{ $status }}</div>
-                <div class="title"><a href="{{ route('landing-page') }}">کد وضعیت : </a>{{ $status }}</div>
+                <div class="title"><a href="{{ route('landing-page') }}">بازگشت به صفحه اصلی</a></div>
             </div>
         </div>
     </body>
